@@ -1,0 +1,24 @@
+{%comment%}Include this to collection-template.liquid from sections (broklyn theme){%endcomment%}
+<div class="filter-dropdown__wrapper text-center collection-filters">
+  <div class="filter-dropdown">
+    <label class="filter-dropdown__label" for="allCollections">
+      <span class="filter-dropdown__label--title">Collections</span>
+      <span class="filter-dropdown__label--active"></span>
+    </label>
+    {% assign sort_by = collection.sort_by | default: collection.default_sort_by %}
+    <select name="all_collections" id="allCollections" aria-describedby="a11y-refresh-page-message" class="filter-dropdown__select">
+      {% for coll in collections %}
+        <option value="{{ coll.url }}"{% if coll.url == collection.url %} selected="selected"{% endif %}>{{ coll.title }}</option>
+      {% endfor %}
+    </select>
+  </div>
+</div>
+<script>
+  jQuery(function () {
+    // remove the below comment in case you need chnage on document ready
+    // location.href=jQuery("#selectbox").val(); 
+    jQuery("#allCollections").change(function () {
+        location.href = jQuery(this).val();
+    });
+  });
+</script>
